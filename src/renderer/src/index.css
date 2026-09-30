@@ -1,0 +1,112 @@
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-sans/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1100px 560px at 8% -12%, oklch(0.32 0.08 55 / 0.28), transparent 55%),
+    radial-gradient(900px 480px at 100% 0%, oklch(0.22 0.04 35 / 0.35), transparent 52%),
+    oklch(0.13 0.018 48);
+  font-feature-settings: 'ss01' on, 'cv11' on;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.34 0.014 240) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: oklch(0.34 0.014 240);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.45 0.012 240);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+@layer components {
+  .panel {
+    @apply bg-ink-900 shadow-panel shadow-inset backdrop-blur-sm;
+    background-color: oklch(0.17 0.02 48 / 0.94);
+  }
+
+  .field {
+    @apply w-full rounded-md border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-ink-100
+      outline-none transition duration-200 ease-outExpo
+      placeholder:text-ink-600
+      focus:ring-2;
+    border-color: oklch(0.34 0.016 48 / 0.85);
+    background-color: oklch(0.13 0.018 48 / 0.88);
+  }
+
+  .field:focus {
+    border-color: oklch(0.78 0.145 55 / 0.65);
+    --tw-ring-color: oklch(0.78 0.145 55 / 0.22);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium
+      transition duration-200 ease-outExpo outline-none
+      focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-40;
+  }
+
+  .btn:focus-visible {
+    --tw-ring-color: oklch(0.78 0.145 55 / 0.4);
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-ink-950 hover:brightness-110 active:brightness-95;
+  }
+
+  .btn-ghost {
+    @apply btn border border-ink-700 bg-ink-850 text-ink-200 hover:bg-ink-800 hover:text-ink-100;
+    border-color: oklch(0.34 0.016 48 / 0.85);
+    background-color: oklch(0.21 0.02 48 / 0.7);
+  }
+
+  .btn-danger {
+    @apply btn border bg-danger-soft text-danger hover:brightness-110;
+    border-color: oklch(0.68 0.17 28 / 0.4);
+  }
+
+  .label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
