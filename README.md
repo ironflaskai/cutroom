@@ -74,7 +74,7 @@ chmod +x "Start Cutroom.sh"
 
 The launcher installs dependencies on the first run and starts Cutroom. Node.js 20+ is required. On Ubuntu, install the current LTS release from [NodeSource](https://github.com/nodesource/distributions) or use [nvm](https://github.com/nvm-sh/nvm).
 
-Install [Ollama for Linux](https://ollama.com/download/linux), then download the recommended local multimodal model:
+On a fresh Ubuntu desktop, the installer adds Node.js 24 LTS and Ollama when missing, starts Ollama, downloads the model, installs Cutroom dependencies, and launches the app:
 
 ```bash
 chmod +x "Install Local Model.sh"
@@ -82,6 +82,12 @@ chmod +x "Install Local Model.sh"
 ```
 
 The default is `qwen3.5:35b` (about 24 GB), which handles both prompt writing and reference-image understanding. For a server with roughly 96 GB or more available GPU memory, you can instead run `ollama pull qwen3.5:122b` and select it in Cutroom for maximum local quality.
+
+To make the bootstrap download the 122B model directly:
+
+```bash
+CUTROOM_MODEL=qwen3.5:122b ./"Install Local Model.sh"
+```
 
 To create a portable AppImage and a Debian package:
 
