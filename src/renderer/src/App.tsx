@@ -37,12 +37,20 @@ const BRIEF_PLACEHOLDER = `Keep the camera, blocking, and pacing of the referenc
 const CHARACTER_INTO_VIDEO_BRIEF = `Rewrite the attached reference clip with my character.
 
 Use Full-reference (Ref2VA):
-- Appearance identity from the still (<Picture 1> → <Subject 1>)
-- Motion, camera path, cuts, and pacing from the clip (<Video 1>)
+- One character identity jointly defined by every attached character still (<Picture 1>, <Picture 2>, <Picture 3> → <Subject 1>)
+- Treat <Video 1> as the direct source edit and preserve it frame-for-frame. This is NOT inspiration and NOT a reinterpretation.
+- The ONLY allowed visual changes are: replace the original performer's appearance with <Subject 1>, and reskin the background/set without changing its geometry or staging.
+- <Subject 1> must reproduce the original performer's complete performance exactly: every action, gesture, pose, body movement, walking path, interaction, expression, eye movement, blink, mouth shape, lip-sync, placement, direction, speed, pause, and timing.
+- Preserve every original shot, frame order, cut frame, transition, duration, camera position, angle, framing, lens/focus behavior, camera path, movement speed, composition, and pacing.
+- Do not add, remove, reorder, shorten, extend, reinterpret, improve, dramatize, or simplify anything.
 - Replace the original performer; do not keep them on screen
+- Reskin only the room's visual identity using new colors, finishes, materials, décor, artwork, and furniture appearance. Preserve identical spatial layout, dimensions, object positions, interaction points, camera geometry, lighting behavior, occlusion, parallax, and shot-to-shot continuity. If the source stays in one room, keep one coherent reskinned version of that room across every shot; never invent another location.
+- Enable the synchronized audio track embedded in <Video 1> as <Audio 1>. Reuse the complete signal 1:1, unchanged, as the target video's final audio. Do not regenerate, transcribe, remix, clean, replace, add, or remove any audio.
 
-summary should use [video editing + reference generation] (or [reference generation] if only guiding motion).
-retention: <Subject 1> fully_preserved from the still; <Video 1> partially_preserved for camera/blocking/environment.`
+summary must use [video editing + reference generation + audio reuse].
+retention: <Subject 1> fully_preserved from all character stills; <Video 1> partially_preserved for the complete performance/camera/edit blueprint; <Audio 1>: fully_copy - <Audio 1> is reused 1:1 as the target video's complete final audio track.
+
+Do not invent narration, dialogue, lyrics, actions, shots, locations, audio, timestamps, or placeholders. Output a strict two-variable source-video edit: character appearance and background surface design only.`
 
 function fileToAsset(file: {
   name: string

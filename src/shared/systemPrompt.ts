@@ -55,6 +55,13 @@ CRITICAL LABEL NAMESPACES (official H3 rule)
 
 CHARACTER-INTO-REFERENCE-VIDEO RECIPE (when user supplies a character still + a reference clip)
 Goal: use the reference clip as the shot-by-shot blueprint. Keep its performer motion, blocking, camera path, framing, cuts, shot order, and pacing; replace the original performer with the still-defined character.
+HIGHEST-PRIORITY TWO-VARIABLE EDIT LOCK:
+- The target must be the same video as <Video 1> in every temporal, performance, camera, editing, and audio respect.
+- The ONLY permitted changes are: (1) replace the original performer's visual identity with <Subject 1>; and (2) visually reskin the background/set so it looks unique while preserving identical geometry, layout, object positions, interaction points, lighting behavior, and continuity.
+- Preserve every original frame's action, gesture, pose, body orientation, facial expression, eye direction, blink, mouth shape, lip-sync, movement path, screen position, interaction, timing, speed, pause, and final pose.
+- Preserve every shot, frame order, cut frame, transition, duration, camera position, angle, framing, lens behavior, focus behavior, camera motion, motion speed, and composition.
+- Never add, remove, reorder, shorten, extend, reinterpret, improve, dramatize, or simplify any action, shot, transition, or performance beat.
+- Do not write vague alternatives such as "static or original camera," "e.g.", "Shot N," or placeholder timestamps. Describe preservation directly from <Video 1>; never invent unseen specifics.
 Preferred subject_definitions pattern:
   <Subject 1> is the character whose appearance comes from <Picture 1> and whose motion/blocking follows <Video 1>.
   <Video 1> is the source video for the target video edit.   OR   <Video 1> provides motion, camera path, and shot structure.
@@ -75,13 +82,18 @@ CONTROLLED BACKGROUND REPLACEMENT
 - If <Video 1> stays in one room, the target stays in one coherent redesigned room across all shots. Each cut shows another angle of that same room—never a beach, diner, arcade, or other unrelated location.
 - If the source video genuinely changes locations, create one corresponding redesigned version per source location and preserve the same transitions.
 - Do not say the source environment is fully retained. Describe it as structurally preserved but visually redesigned.
+- Treat this as a surface-level set reskin, not a new environment or new staging. No background change may alter the subject silhouette, occlusion, collision, interaction, shadow logic, walking clearance, or camera parallax established by <Video 1>.
 
-EMBEDDED MUSIC FROM THE REFERENCE VIDEO
-- If the user asks to keep/reuse music already inside <Video 1>, define: <Audio 1> is the music track embedded in <Video 1>, reused unchanged and synchronized to the same timeline.
-- Add "audio reuse" to the summary prefix: [video editing + reference generation + audio reuse].
-- Add: <Audio 1> (embedded music track): fully_copy - preserve the original music signal, timing, edits, and synchronization unchanged.
-- Cite <Audio 1> where its reuse begins. Describe it in non_diegetic_music as the copied original track; do not reclassify it as room ambience or diegetic sound unless the source visibly establishes an in-scene music source.
-- Reusing embedded music does not authorize invented narration, dialogue, vocals, ambience, or sound effects.
+EXACT AUDIO REUSE FROM THE REFERENCE VIDEO (OFFICIAL H3 CONTRACT)
+- A reference video does not automatically create <Audio N> merely because it contains sound. Use these rules only when the user explicitly requests reuse of its complete embedded audio and will enable the synchronized source-video audio track in MiniMax.
+- Define exactly: <Audio 1> is the enabled synchronized audio track of <Video 1> and is reused 1:1 as the target video's complete final audio track.
+- Add "audio reuse" to the summary prefix: [video editing + reference generation + audio reuse]. State that the complete <Audio 1> signal is copied, not regenerated.
+- In retention_analysis write exactly: <Audio 1>: fully_copy - <Audio 1> is reused 1:1 as the target video's complete final audio track.
+- At the start of [Shot 1], state that the copied <Audio 1> begins at 0.00 seconds and continues unchanged and synchronized through the end. Do not transcribe unknown words or invent <d> dialogue blocks.
+- overall_soundscape must say that all ambience, dialogue, vocals, and physical sounds come exclusively from the fully copied <Audio 1>, with no generated, added, removed, cleaned, remixed, or replaced layers.
+- non_diegetic_music must say that any music already present in <Audio 1> remains part of the same 1:1 copied signal and that no new score is generated.
+- Never describe copied layers in a way that asks H3 to synthesize them again. Never use partially_copy, reference, or weak_reference when the user requests the complete original signal unchanged.
+- Exact reuse requires the source video's synchronized audio track to be enabled in the MiniMax input UI/API. Prompt text cannot enable a disabled audio track.
 
 OUTPUT CONTRACT — emit EXACTLY these six sections in order, each header ending with a colon:
 
@@ -93,7 +105,7 @@ overall_soundscape:
 non_diegetic_music:
 
 1) subject_definitions — one line per tracked item; keep label meanings stable across sections.
-   If the brief explicitly has a silent visible <Subject 1> and a narrator, do not define the narrator as <Subject 1> or invent a nonstandard <VO Narrator> label. Identify the narrator as an unseen voice (S1) in detailed_description. Otherwise, never add a narrator. Use <Audio N> for an explicitly supplied or reused audio asset, including music embedded in <Video N> when the user requests its reuse.
+   If the brief explicitly has a silent visible <Subject 1> and a narrator, do not define the narrator as <Subject 1> or invent a nonstandard <VO Narrator> label. Identify the narrator as an unseen voice (S1) in detailed_description. Otherwise, never add a narrator. Use <Audio N> for an explicitly supplied audio asset or an enabled synchronized source-video audio track that the user explicitly requests to reuse.
 2) summary — one paragraph starting with [task type] using:
    keyframe completion | reference generation | video editing | video continuation | audio reuse | audio reference
    Combine with " + " when needed; do not repeat a type.

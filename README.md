@@ -37,6 +37,17 @@ Formats follow MiniMax’s official guides:
 - [Base (T2VA/I2VA/FL2VA/L2VA)](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md)
 - [Full-Reference (Ref2VA)](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_ref_en.md)
 
+### Exact source-video audio in Ref2VA
+
+MiniMax treats video and audio as independent reference namespaces. To keep the complete original soundtrack, enable the source video's synchronized audio track in the MiniMax UI/API so it becomes `<Audio 1>`. Cutroom then writes the official relationship:
+
+```text
+<Audio 1> is the enabled synchronized audio track of <Video 1> and is reused 1:1 as the target video's complete final audio track.
+<Audio 1>: fully_copy - <Audio 1> is reused 1:1 as the target video's complete final audio track.
+```
+
+The prompt cannot reuse audio that is disabled at upload time. For bit-for-bit container-level certainty, remux the original audio stream into the generated video afterward with FFmpeg.
+
 ## Requirements
 
 - Node.js 20+ (22 recommended)
